@@ -1,0 +1,17 @@
+{
+  "name": "CSVParser",
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.0.12",
+    "csv-parser": "^2.3.0"
+  },
+  "scripts": {
+    "test": "mocha *.test.ts"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "typescript": "^3.5.2"
+  }
+}

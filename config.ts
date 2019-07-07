@@ -1,3 +1,5 @@
+import validators = require('./validators');
+
 export let csv: ColumnDescriptor[] = [
     {
         name: "ID",
@@ -24,21 +26,23 @@ export let csv: ColumnDescriptor[] = [
         name: "Mail",
         type: 'Mail',
         validators: [
-            new validators.Length(6,18)
+            new validators.Length(6,18),
+            new validators.Email()
         ]
     },
     {
-        name: "Date of Registration",
+        name: "Date of registration",
         type: "date",
         validators: [
-            new validators.Length(14,16)
+
         ]
     },
     {
         name: "Phone",
         type: 'Phone',
         validators: [
-            new validators.Length(9,12)
+            new validators.Length(14,16),
+            new validators.Phone()
         ]
     }
 ];
@@ -52,6 +56,6 @@ export interface CsvType {
     parseString(str: string): this;
 }
 export interface Validators<T> {
-    /** if return empty array then object valid */
+    errorArray:string[];
     validate(value: T) : string[];
 }
