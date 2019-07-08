@@ -1,11 +1,11 @@
+import csvParser = require('csv-parser');
 import fs = require("fs");
-import  csvParser = require('csv-parser');
 // import config = require('./config');
+// import {ColumnDescriptor} from "./config";
 
 fs.createReadStream('Users.csv')
     .pipe(csvParser({ separator: ';' }))
-    .on('data', (data) => { console.log(data)})//{validate(data, config.csv);outputResult(validate, data, config.csv)})
+    .on('data', (data) => console.log(data))
     .on('end', () => {console.log('end');
     });
-
 

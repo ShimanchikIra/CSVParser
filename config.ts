@@ -5,29 +5,30 @@ export let csv: ColumnDescriptor[] = [
         name: "ID",
         type: 'ID',
         validators: [
-            new validators.Length(1,4)
+            validators.checkLength(1,4),
+            validators.checkRequire()
         ]
     },
     {
         name: "Name",
         type: "string",
         validators: [
-            new validators.Length(1,18)
+            validators.checkLength(1,18)
         ]
     },
     {
         name: "Surname",
         type: "string",
         validators: [
-            new validators.Length(1,18)
+            validators.checkLength(1,18)
         ]
     },
     {
         name: "Mail",
         type: 'Mail',
         validators: [
-            new validators.Length(6,18),
-            new validators.Email()
+            validators.checkLength(6,18),
+            validators.includeElement('@')
         ]
     },
     {
@@ -41,21 +42,20 @@ export let csv: ColumnDescriptor[] = [
         name: "Phone",
         type: 'Phone',
         validators: [
-            new validators.Length(14,16),
-            new validators.Phone()
+            validators.checkLength(14,16),
+            validators.regex(/^\375 \(17|25|29|33|44\) [0-9]{7}$/)
         ]
     }
 ];
-
 export interface ColumnDescriptor {
     name: string,
     type: CsvType | string,
-    validators: Array<Validators<string>>
+    // validators: Array<Validators<string>> | Array<Validators<obj>>;
+    validators:  Array<Validators<string>>;
 }
 export interface CsvType {
     parseString(str: string): this;
 }
 export interface Validators<T> {
-    errorArray:string[];
-    validate(value: T) : string[];
+    validate(value: T, csv?:ColumnDescriptor[]) : string[];
 }
