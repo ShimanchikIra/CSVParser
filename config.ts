@@ -1,34 +1,58 @@
-import validators = require('./validators');
+import {checkRequire, checkLength, checkType} from "./validators";
 
+export let ID:CsvType={
+     parseString:function (str:string):CsvType | null{
+         if (isInteger(+str))
+         return Phone=JSON.parse(str);
+         else return null;
+     }
+
+};
+
+export let Phone:CsvType={
+    parseString:function (str:string):CsvType | null {
+        let phone:string=str.split(' ').join('');
+        const regex:RegExp=/^375 (17|25|29|33|44) [0-9]{7}$/;
+        if (regex.test(str)) return Phone=JSON.parse(phone);
+        else return null;
+    }
+};
+export let Mail:CsvType={
+    parseString:function (str:string): null | string{
+        if (str.indexOf('@')!=-1) return str;
+        else return null;
+    }
+};
 export let csv: ColumnDescriptor[] = [
     {
         name: "ID",
-        type: 'ID',
+        type: ID,
         validators: [
-            validators.checkLength(1,4),
-            validators.checkRequire()
+            checkLength(1,4),
+            checkRequire(),
+            checkType(ID)
         ]
     },
     {
         name: "Name",
         type: "string",
         validators: [
-            validators.checkLength(1,18)
+            checkLength(1,18),
         ]
     },
     {
         name: "Surname",
         type: "string",
         validators: [
-            validators.checkLength(1,18)
+            checkLength(1,18)
         ]
     },
     {
         name: "Mail",
-        type: 'Mail',
+        type: Mail,
         validators: [
-            validators.checkLength(6,18),
-            validators.includeElement('@')
+            checkLength(6,18),
+            checkType(Mail)
         ]
     },
     {
@@ -40,22 +64,24 @@ export let csv: ColumnDescriptor[] = [
     },
     {
         name: "Phone",
-        type: 'Phone',
+        type: Phone,
         validators: [
-            validators.checkLength(14,16),
-            validators.regex(/^\375 \(17|25|29|33|44\) [0-9]{7}$/)
+            checkLength(14,16),
+            checkType(Phone)
         ]
     }
 ];
 export interface ColumnDescriptor {
     name: string,
-    type: CsvType | string,
-    // validators: Array<Validators<string>> | Array<Validators<obj>>;
-    validators:  Array<Validators<string>>;
+    type: string|CsvType,
+    validators:  Array<Validators<string>>
 }
 export interface CsvType {
-    parseString(str: string): this;
+    parseString(str: string): this | null | string;
 }
 export interface Validators<T> {
-    validate(value: T, csv?:ColumnDescriptor[]) : string[];
+    validate(value: T) : string[];
+}
+function isInteger(num:number):boolean {
+    return (num ^ 0) === num;
 }

@@ -1,20 +1,14 @@
 import config = require('./config');
+import {CsvType} from "./config";
 
 export function checkLength(minLength: number, maxLength: number):config.Validators<string> {
     return  {
         validate: function(value: string): string[] {
-             let errorsArr:string[]=[];
-             if(value.length>=minLength && value.length<=maxLength)
-                 return errorsArr;
-             else {
-                 errorsArr.push("length cannot be ");
-                 if (value.length<minLength)
-                     errorsArr.push(`less than ${minLength};`);
-                 else if (value.length>minLength)
-                     errorsArr.push(`more than ${maxLength};`);
-                 return errorsArr;
-             }
-     }
+            let errorsArr:string[]=[];
+            if(value.length<minLength || value.length>maxLength)
+                  errorsArr.push(`length: ${value.length}, max length: ${maxLength}, mix length: ${minLength};`);
+            return errorsArr;
+        }
     }
 }
 export function checkRequire():config.Validators<string> {
@@ -28,35 +22,13 @@ export function checkRequire():config.Validators<string> {
         }
     }
 }
- export function regex(regex:RegExp):config.Validators<string> {
-     return  {
-         validate: function(value: string): string[] {
-            let errorsArr:string[]=[];
-             if (!regex.test(value[1]))
-                errorsArr.push("doesn't meet the regular expression;");
-             return errorsArr;
-         }
-     }
- }
-export function includeElement(necessaryElement:string):config.Validators<string> {
+export function checkType(customType:CsvType):config.Validators<string> {
     return  {
         validate: function(value: string): string[] {
             let errorsArr:string[]=[];
-            if (value.indexOf(necessaryElement)==-1)
-                errorsArr.push(`doesn't contain '${necessaryElement}';`);
+            if (customType.parseString(value)==null)  errorsArr.push('invalid data type;');
             return errorsArr;
         }
     }
 }
-export function date(necessaryElement:string):config.Validators<string> {
-    return  {
-        validate: function(value: string): string[] {
-            let errorsArr:string[]=[];
-            if (value.indexOf(necessaryElement)==-1)
-                errorsArr.push(`doesn't contain '${necessaryElement}';`);
-            return errorsArr;
-        }
-    }
-}
-
 
