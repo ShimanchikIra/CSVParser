@@ -39,9 +39,7 @@ function checkDate() {
         validate: function (value) {
             var errorsArr = [];
             var date = new Date(value);
-            if (!isNaN(date.getTime()))
-                console.log(date);
-            else
+            if (isNaN(date.getTime()))
                 errorsArr.push("Invalid date");
             return errorsArr;
         }

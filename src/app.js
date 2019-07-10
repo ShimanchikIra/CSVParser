@@ -3,14 +3,16 @@ exports.__esModule = true;
 var csvParser = require("csv-parser");
 var fs = require("fs");
 var config_1 = require("./config");
-fs.createReadStream('Users.csv')
+fs.createReadStream('src/Users.csv')
     .pipe(csvParser({ separator: ';' }))
     .on('data', function (data) {
     validateObj(data, config_1.csv).then(function (errors) {
         if (errors.length > 0) {
             console.log.apply(console, ["\nInvalid data: \n" + JSON.stringify(data, null, 1)].concat(errors));
+            fs.appendFileSync("src/InvalidData", "\n" + JSON.stringify(data, null, 0) + " " + errors + "\n");
         }
         else {
+            fs.appendFileSync("src/ValidData", JSON.stringify(data, null, 0) + "\n");
         }
     })["catch"](function (error) {
         console.log(error.message);

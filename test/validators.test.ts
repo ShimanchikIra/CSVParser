@@ -1,5 +1,5 @@
 const expect=require('chai').expect;
-const validators = require("../validators");
+const validators = require("../src/validators");
 
 describe('checkLength', function() {
     it("Should return empty array when the length of the value is in interval", function(){

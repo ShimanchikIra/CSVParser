@@ -3,12 +3,14 @@ import fs = require("fs");
 import {csv, ColumnDescriptor} from "./config";
 
 
-fs.createReadStream('Users.csv')
+fs.createReadStream('src/Users.csv')
     .pipe(csvParser({ separator: ';' }))
     .on('data', (data) => {validateObj(data, csv).then(errors=>{
         if (errors.length>0){
             console.log(`\nInvalid data: \n${JSON.stringify(data, null, 1)}`, ...errors);
+            fs.appendFileSync("src/InvalidData", `\n${JSON.stringify(data, null, 0)} ${errors}\n`);
         } else {
+            fs.appendFileSync("src/ValidData", `${JSON.stringify(data, null, 0)}\n`);
         }
     }).catch(function (error) {
         console.log(error.message);
