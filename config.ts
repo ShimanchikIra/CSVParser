@@ -1,4 +1,4 @@
-import {checkRequire, checkLength, checkType} from "./validators";
+import {checkRequire, checkLength, checkType, checkDate} from "./validators";
 
 export let ID:CsvType={
      parseString:function (str:string):CsvType | null{
@@ -8,7 +8,6 @@ export let ID:CsvType={
      }
 
 };
-
 export let Phone:CsvType={
     parseString:function (str:string):CsvType | null {
         let phone:string=str.split(' ').join('');
@@ -59,7 +58,7 @@ export let csv: ColumnDescriptor[] = [
         name: "Date of registration",
         type: "date",
         validators: [
-
+            checkDate()
         ]
     },
     {

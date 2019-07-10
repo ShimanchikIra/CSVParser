@@ -1,34 +1,44 @@
-import config = require('./config');
-import {CsvType} from "./config";
+import {CsvType, Validators} from "./config";
 
-export function checkLength(minLength: number, maxLength: number):config.Validators<string> {
+export function checkLength(minLength: number, maxLength: number):Validators<string> {
     return  {
         validate: function(value: string): string[] {
             let errorsArr:string[]=[];
             if(value.length<minLength || value.length>maxLength)
-                  errorsArr.push(`length: ${value.length}, max length: ${maxLength}, mix length: ${minLength};`);
+                  errorsArr.push(`Length: ${value.length}, max length: ${maxLength}, mix length: ${minLength};`);
             return errorsArr;
         }
     }
 }
-export function checkRequire():config.Validators<string> {
+export function checkRequire():Validators<string> {
     return  {
         validate: function(value: string): string[] {
             let errorsArr:string[]=[];
             if(value==null || value==''){
-                errorsArr.push('this field is required;');
+                errorsArr.push('This field is required;');
             }
             return errorsArr;
         }
     }
 }
-export function checkType(customType:CsvType):config.Validators<string> {
+export function checkType(customType:CsvType):Validators<string> {
     return  {
         validate: function(value: string): string[] {
             let errorsArr:string[]=[];
-            if (customType.parseString(value)==null)  errorsArr.push('invalid data type;');
+            if (customType.parseString(value)==null)  errorsArr.push('Invalid data type;');
             return errorsArr;
         }
     }
 }
-
+export function checkDate():Validators<string> {
+    return  {
+        validate: function(value: string): string[] {
+            let errorsArr:string[]=[];
+            let date: Date = new Date(value);
+            if (!isNaN(date.getTime()))
+                console.log(date);
+            else errorsArr.push("Invalid date");
+            return errorsArr;
+        }
+    }
+}
