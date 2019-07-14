@@ -6,7 +6,6 @@ export let ID:CsvType={
          return Phone=JSON.parse(str);
          else return null;
      }
-
 };
 export let Phone:CsvType={
     parseString:function (str:string):CsvType | null {

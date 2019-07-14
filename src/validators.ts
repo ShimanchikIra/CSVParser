@@ -14,7 +14,7 @@ export function checkRequire():Validators<string> {
     return  {
         validate: function(value: string): string[] {
             let errorsArr:string[]=[];
-            if(value==null || value==''){
+            if(value==null || value===''){
                 errorsArr.push('This field is required;');
             }
             return errorsArr;
@@ -34,6 +34,7 @@ export function checkDate():Validators<string> {
     return  {
         validate: function(value: string): string[] {
             let errorsArr:string[]=[];
+            //поменять местами число и месяц!!!!
             let date: Date = new Date(value);
             if (isNaN(date.getTime())) errorsArr.push("Invalid date");
             return errorsArr;
