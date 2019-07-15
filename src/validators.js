@@ -15,7 +15,7 @@ function checkRequire() {
     return {
         validate: function (value) {
             var errorsArr = [];
-            if (value == null || value === '') {
+            if (value === '') {
                 errorsArr.push('This field is required;');
             }
             return errorsArr;
@@ -38,7 +38,6 @@ function checkDate() {
     return {
         validate: function (value) {
             var errorsArr = [];
-            //поменять местами число и месяц!!!!
             var date = new Date(value);
             if (isNaN(date.getTime()))
                 errorsArr.push("Invalid date");

@@ -1,13 +1,13 @@
 import csvParser = require('csv-parser');
 import fs = require("fs");
-// import {csv} from "./config";
 import config = require('./config');
 const results = [];
 
 fs.createReadStream('src/Users.csv')
     .pipe(csvParser({ separator: ';' }))
     .on('data',(data)=>{results.push(data)})
-    .on('end',()=>{fs.appendFileSync("src/ValidData", writeToValidFile(results.filter(value => isValidObj(value))));
+    .on('end',()=>{
+        fs.appendFileSync("src/ValidData", writeToValidFile(results.filter(value => isValidObj(value))));
     });
 
 function isValidObj(value:User): boolean{
@@ -47,12 +47,12 @@ interface User {
     Phone: string;
 }
 function writeToValidFile(users: User[]): string {
-    let out: string=null;
+    let out: string='';
     users.forEach((user)=> {
         for (let key in user) {
             out +=`${user[key]},`;
         }
-        out +=`\n`;
+        out +='\n';
     });
    return out;
 }

@@ -2,7 +2,6 @@
 exports.__esModule = true;
 var csvParser = require("csv-parser");
 var fs = require("fs");
-// import {csv} from "./config";
 var config = require("./config");
 var results = [];
 fs.createReadStream('src/Users.csv')
@@ -39,7 +38,7 @@ function validation(key, value) {
     return errorsKey;
 }
 function writeToValidFile(users) {
-    var out = null;
+    var out = '';
     users.forEach(function (user) {
         for (var key in user) {
             out += user[key] + ",";
