@@ -3,7 +3,6 @@ exports.__esModule = true;
 var csvParser = require("csv-parser");
 var fs = require("fs");
 var config_1 = require("./config");
-// import config = require('./config');
 var results = [];
 fs.createReadStream('src/Users.csv')
     .pipe(csvParser({ separator: ';' }))
