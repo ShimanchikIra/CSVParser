@@ -9,15 +9,13 @@ fs.createReadStream('src/Users.csv')
     .pipe(csvParser({ separator: ';' }))
     .on('data', function (data) { results.push(data); })
     .on('end', function () {
-    fs.appendFileSync("src/ValidData", writeToValidFile(results.filter(function (value) { return isValidObj(value, config_1.csv); })));
+    fs.appendFileSync("src/ValidData", writeToFile(results.filter(function (value) { return isValidObj(value, config_1.csv); })));
 });
 function isValidObj(value, csv) {
     var isValid = true;
     var errorsObj = [];
-    // let countKey:number=0;
     for (var key in value) {
         errorsObj.push.apply(errorsObj, validation(key, value[key], csv));
-        // countKey++;
     }
     if (errorsObj.length) {
         isValid = false;
@@ -38,7 +36,7 @@ function validation(key, value, csv) {
     });
     return errors;
 }
-function writeToValidFile(users) {
+function writeToFile(users) {
     var out = '';
     users.forEach(function (user) {
         for (var key in user) {

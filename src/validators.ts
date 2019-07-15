@@ -35,7 +35,10 @@ export function checkDate():Validators<string> {
     return  {
         validate: function(value: string): string[] {
             let errors:string[]=[];
-            let date: Date = new Date(value);
+            let day:string = value.substring(0,2);
+            let month:string = value.substring(3,5);
+            let year:string=value.substring(6);
+            let date: Date = new Date(`${month}/${day}/${year}`);
             if (isNaN(date.getTime())) errors.push("Invalid date");
             return errors;
         }

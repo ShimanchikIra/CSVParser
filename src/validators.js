@@ -38,7 +38,11 @@ function checkDate() {
     return {
         validate: function (value) {
             var errors = [];
-            var date = new Date(value);
+            console.log(value.length);
+            var day = value.substring(0, 2);
+            var month = value.substring(3, 5);
+            var year = value.substring(6);
+            var date = new Date(month + "/" + day + "/" + year);
             if (isNaN(date.getTime()))
                 errors.push("Invalid date");
             return errors;
