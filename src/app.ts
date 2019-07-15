@@ -1,7 +1,6 @@
 import csvParser = require('csv-parser');
 import fs = require("fs");
 import {ColumnDescriptor, csv} from "./config";
-// import config = require('./config');
 const results = [];
 
 fs.createReadStream('src/Users.csv')

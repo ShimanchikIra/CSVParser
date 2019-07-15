@@ -2,17 +2,21 @@
   "name": "CSVParser",
   "version": "1.0.0",
   "dependencies": {
-    "@types/mocha": "^5.2.7",
     "@types/node": "^12.0.12",
     "csv-parser": "^2.3.0"
   },
   "scripts": {
-    "test": "nyc --reporter=text mocha"
+    "test": "jasmine-ts --config=jasmine.json",
+    "testWithCoverage": "nyc -r lcov -e .ts -x \"*.test.ts\" jasmine-ts --config=jasmine.json && nyc report"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4",
+    "@types/jasmine": "^3.3.13",
+    "jasmine": "^3.4.0",
+    "jasmine-console-reporter": "^3.1.0",
+    "jasmine-ts": "^0.3.0",
+    "karma-typescript": "^4.1.1",
     "nyc": "^14.1.1",
-    "typescript": "^3.5.2"
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
   }
 }

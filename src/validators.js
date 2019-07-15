@@ -38,7 +38,6 @@ function checkDate() {
     return {
         validate: function (value) {
             var errors = [];
-            console.log(value.length);
             var day = value.substring(0, 2);
             var month = value.substring(3, 5);
             var year = value.substring(6);
