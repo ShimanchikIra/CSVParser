@@ -3,41 +3,41 @@ import {CsvType, Validators} from "./config";
 export function checkLength(minLength: number, maxLength: number):Validators<string> {
     return  {
         validate: function(value: string): string[] {
-            let errorsArr:string[]=[];
+            let errors:string[]=[];
             if(value.length<minLength || value.length>maxLength)
-                  errorsArr.push(`Length: ${value.length}, max length: ${maxLength}, mix length: ${minLength};`);
-            return errorsArr;
+                  errors.push(`Length: ${value.length}, max length: ${maxLength}, mix length: ${minLength};`);
+            return errors;
         }
     }
 }
 export function checkRequire():Validators<string> {
     return  {
         validate: function(value: string): string[] {
-            let errorsArr:string[]=[];
+            let errors:string[]=[];
             if(value===''){
-                errorsArr.push('This field is required;');
+                errors.push('This field is required;');
             }
-            return errorsArr;
+            return errors;
         }
     }
 }
 export function checkType(customType:CsvType):Validators<string> {
     return  {
         validate: function(value: string): string[] {
-            let errorsArr:string[]=[];
+            let errors:string[]=[];
             if (customType.parseString(value)==null)
-                errorsArr.push('Invalid data type;');
-            return errorsArr;
+                errors.push('Invalid data type;');
+            return errors;
         }
     }
 }
 export function checkDate():Validators<string> {
     return  {
         validate: function(value: string): string[] {
-            let errorsArr:string[]=[];
+            let errors:string[]=[];
             let date: Date = new Date(value);
-            if (isNaN(date.getTime())) errorsArr.push("Invalid date");
-            return errorsArr;
+            if (isNaN(date.getTime())) errors.push("Invalid date");
+            return errors;
         }
     }
 }

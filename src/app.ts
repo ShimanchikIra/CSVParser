@@ -1,22 +1,21 @@
 import csvParser = require('csv-parser');
 import fs = require("fs");
-import config = require('./config');
+import {ColumnDescriptor, csv} from "./config";
+// import config = require('./config');
 const results = [];
 
 fs.createReadStream('src/Users.csv')
     .pipe(csvParser({ separator: ';' }))
     .on('data',(data)=>{results.push(data)})
     .on('end',()=>{
-        fs.appendFileSync("src/ValidData", writeToValidFile(results.filter(value => isValidObj(value))));
+        fs.appendFileSync("src/ValidData", writeToFile(results.filter(value => isValidObj(value, csv))));
     });
 
-function isValidObj(value:User): boolean{
+function isValidObj(value:User | Object, csv:ColumnDescriptor[]): boolean{
     let isValid:boolean=true;
     let errorsObj: string[] = [];
     for (let key in value) {
-        let errorsKey:string[]=validation(key, value[key]);
-        if (errorsKey.length)
-            errorsObj.push(`\n${key}: `, ...errorsKey);
+        errorsObj.push(...validation(key, value[key], csv));
     }
     if (errorsObj.length){
         isValid=false;
@@ -25,18 +24,18 @@ function isValidObj(value:User): boolean{
     }
     return isValid;
 }
-function validation(key: string, value: string): string[]{
-    let errorsKey: string[] = [];
-    config.csv.forEach((columnDescriptor) => {
+function validation(key: string, value: string, csv:ColumnDescriptor[]): string[]{
+    let errors: string[] = [];
+    csv.forEach((columnDescriptor) => {
         if (key === columnDescriptor.name) {
             columnDescriptor.validators.forEach((validator) =>
              {
                 if (validator.validate(value).length)
-                    errorsKey.push(...validator.validate(value));
+                    errors.push(`\n${key}: `,...validator.validate(value));
             })
         }
     });
-    return errorsKey;
+    return errors;
 }
 interface User {
     ID: string,
@@ -46,7 +45,7 @@ interface User {
     'Date of registration': string,
     Phone: string;
 }
-function writeToValidFile(users: User[]): string {
+function writeToFile(users: User[] | Object[]): string {
     let out: string='';
     users.forEach((user)=> {
         for (let key in user) {

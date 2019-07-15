@@ -3,10 +3,10 @@ exports.__esModule = true;
 function checkLength(minLength, maxLength) {
     return {
         validate: function (value) {
-            var errorsArr = [];
+            var errors = [];
             if (value.length < minLength || value.length > maxLength)
-                errorsArr.push("Length: " + value.length + ", max length: " + maxLength + ", mix length: " + minLength + ";");
-            return errorsArr;
+                errors.push("Length: " + value.length + ", max length: " + maxLength + ", mix length: " + minLength + ";");
+            return errors;
         }
     };
 }
@@ -14,11 +14,11 @@ exports.checkLength = checkLength;
 function checkRequire() {
     return {
         validate: function (value) {
-            var errorsArr = [];
+            var errors = [];
             if (value === '') {
-                errorsArr.push('This field is required;');
+                errors.push('This field is required;');
             }
-            return errorsArr;
+            return errors;
         }
     };
 }
@@ -26,10 +26,10 @@ exports.checkRequire = checkRequire;
 function checkType(customType) {
     return {
         validate: function (value) {
-            var errorsArr = [];
+            var errors = [];
             if (customType.parseString(value) == null)
-                errorsArr.push('Invalid data type;');
-            return errorsArr;
+                errors.push('Invalid data type;');
+            return errors;
         }
     };
 }
@@ -37,11 +37,11 @@ exports.checkType = checkType;
 function checkDate() {
     return {
         validate: function (value) {
-            var errorsArr = [];
+            var errors = [];
             var date = new Date(value);
             if (isNaN(date.getTime()))
-                errorsArr.push("Invalid date");
-            return errorsArr;
+                errors.push("Invalid date");
+            return errors;
         }
     };
 }
