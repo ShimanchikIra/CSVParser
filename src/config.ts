@@ -1,26 +1,5 @@
-import {checkRequire, checkLength, checkType, checkDate} from "./validators";
+import {checkRequire, checkLength, checkType, checkDate, ID, Mail, Phone} from "./validators";
 
-export let ID:CsvType={
-     parseString:function (str:string):CsvType | null{
-         if (isInteger(+str))
-         return Phone=JSON.parse(str);
-         else return null;
-     }
-};
-export let Phone:CsvType={
-    parseString:function (str:string):CsvType | null {
-        let phone:string=str.split(' ').join('');
-        const regex:RegExp=/^375 (17|25|29|33|44) [0-9]{7}$/;
-        if (regex.test(str)) return Phone=JSON.parse(phone);
-        else return null;
-    }
-};
-export let Mail:CsvType={
-    parseString:function (str:string): null | string{
-        if (str.indexOf('@')!=-1) return str;
-        else return null;
-    }
-};
 export let csv: ColumnDescriptor[] = [
     {
         name: "ID",
@@ -72,7 +51,7 @@ export let csv: ColumnDescriptor[] = [
 export interface ColumnDescriptor {
     name: string,
     type: string|CsvType,
-    validators:  Array<Validators<string>>
+    validators:  Validators<string>[]
 }
 export interface CsvType {
     parseString(str: string): this | null | string;
@@ -80,6 +59,4 @@ export interface CsvType {
 export interface Validators<T> {
     validate(value: T) : string[];
 }
-function isInteger(num:number):boolean {
-    return (num ^ 0) === num;
-}
+
