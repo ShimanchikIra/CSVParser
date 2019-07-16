@@ -1,11 +1,12 @@
 # CSVParser
 
-The program parses the CSV file and then validates the data in accordance with the config.ts file
+The program parses the CSV file and then validates the data in accordance with the config.ts file.
 All .ts,.txt и csv files are in the src directory
 
-To run validation, enter in cli: tsc src/app.ts | node src/app.js
+To run validation, enter in cli: 
+tsc src/app.ts | node src/app.js
 
-Validation result 
+Validation result:
 
 Output of invalid data to the console (also lso invalid data is written to InvalidData.txt)
 
@@ -17,6 +18,7 @@ Output of valid data to the ValidData.txt
  
  
 Running unit tests:
+
 npm run test
 npm run testWithCoverage
 
