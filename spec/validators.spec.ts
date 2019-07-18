@@ -1,4 +1,4 @@
-import {checkDate, checkLength, checkRequire} from "../src/validators";
+import {checkDate, checkLength, checkRequire, ID} from "../src/validators";
 import {Validators} from "../src/config";
 
 describe('checkLength', function() {
@@ -34,7 +34,7 @@ describe('checkRequire', function() {
     });
 });
 describe('checkDate', function() {
-    it('validate() should return not empty array', function() {
+    it('validate() should return not empty array when ', function() {
         let result:number = checkDate().validate('14.23.2017').length;
         expect(result).toBe(1);
     });
@@ -42,4 +42,20 @@ describe('checkDate', function() {
         let result:number = checkRequire().validate('23,12,2011').length;
         expect(result).toBe(0);
     });
+});
+describe('CSVType', function() {
+    describe('CSVType ID', function() {
+        it('parseString ', function() {
+            // let result:number = checkDate().validate('14.23.2017').length;
+            expect(ID.parseString('1k')).toBe(null);
+        });
+        it('parseString ', function() {
+            // let result:number = checkDate().validate('14.23.2017').length;
+            expect(ID.parseString('1001')).not.toBe(null);
+        });
+        // spyOn(person, 'getName');
+        // person.getName();
+        // expect(person.getName).toHaveBeenCalled();
+    });
+
 });
