@@ -29,7 +29,7 @@ function validation(key, value, csv) {
         if (key === columnDescriptor.name) {
             columnDescriptor.validators.forEach(function (validator) {
                 if (validator.validate(value).length)
-                    errors.push.apply(errors, ["\n" + key + ": "].concat(validator.validate(value)));
+                    errors.push("\n" + key + ": ", validator.validate(value));
             });
         }
     });

@@ -57,6 +57,6 @@ export interface CsvType {
     parseString(str: string): this | null | string;
 }
 export interface Validators<T> {
-    validate(value: T) : string[];
+    validate(value: T) : string;
 }
 

@@ -30,7 +30,7 @@ function validation(key: string, value: string, csv:ColumnDescriptor[]): string[
             columnDescriptor.validators.forEach((validator) =>
              {
                 if (validator.validate(value).length)
-                    errors.push(`\n${key}: `,...validator.validate(value));
+                    errors.push(`\n${key}: `,validator.validate(value));
             })
         }
     });
