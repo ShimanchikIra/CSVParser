@@ -54,9 +54,9 @@ export interface ColumnDescriptor {
     validators:  Validators<string>[]
 }
 export interface CsvType {
-    parseString(str: string): this | null | string;
+    isParseString(str: string): boolean;
 }
 export interface Validators<T> {
-    validate(value: T) : string;
+    validate(value: T) : string[];
 }
 

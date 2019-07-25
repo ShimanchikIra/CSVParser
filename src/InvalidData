@@ -213,3 +213,111 @@ Phone: ,Invalid data type;
 Date of registration: ,Invalid date;,
 Phone: ,Length: 13, max length: 16, mix length: 14;,
 Phone: ,Invalid data type;
+
+{
+ "ID": "1003",
+ "Name": "Anna",
+ "Surname": "Antonova",
+ "Mail": "Anna@gmail.ru",
+ "Date of registration": "03/13/2014",
+ "Phone": "375 44 8541254"
+} 
+Date of registration: ,Invalid date;
+
+{
+ "ID": "1004",
+ "Name": "Max",
+ "Surname": "Vasiliev",
+ "Mail": "Max@mail.ru",
+ "Date of registration": "05.07.2008",
+ "Phone": "375 29 14521445"
+} 
+Phone: ,Invalid data type;
+
+{
+ "ID": "1006",
+ "Name": "Oleg",
+ "Surname": "Kats",
+ "Mail": "Oleg@mail.ru",
+ "Date of registration": "29,01,2016",
+ "Phone": "375 28 2540033"
+} 
+Phone: ,Invalid data type;
+
+{
+ "ID": "100k8",
+ "Name": "Elena",
+ "Surname": "Glazov",
+ "Mail": "Elena@mail.ru",
+ "Date of registration": "24,04,2014",
+ "Phone": "375 30 2561421"
+} 
+ID: ,Length: 5, max length: 4, mix length: 1;,
+ID: ,Invalid data type;,
+Phone: ,Invalid data type;
+
+{
+ "ID": "1008",
+ "Name": "Igor",
+ "Surname": "Igorov",
+ "Mail": "Igor@mail.ru",
+ "Date of registration": "25,00,2018",
+ "Phone": "375 29 34k157"
+} 
+Date of registration: ,Invalid date;,
+Phone: ,Length: 13, max length: 16, mix length: 14;,
+Phone: ,Invalid data type;
+
+{
+ "ID": "1003",
+ "Name": "Anna",
+ "Surname": "Antonova",
+ "Mail": "Anna@gmail.ru",
+ "Date of registration": "03/13/2014",
+ "Phone": "375 44 8541254"
+} 
+Date of registration: ,Invalid date;
+
+{
+ "ID": "1004",
+ "Name": "Max",
+ "Surname": "Vasiliev",
+ "Mail": "Max@mail.ru",
+ "Date of registration": "05.07.2008",
+ "Phone": "375 29 14521445"
+} 
+Phone: ,Invalid data type;
+
+{
+ "ID": "1006",
+ "Name": "Oleg",
+ "Surname": "Kats",
+ "Mail": "Oleg@mail.ru",
+ "Date of registration": "29,01,2016",
+ "Phone": "375 28 2540033"
+} 
+Phone: ,Invalid data type;
+
+{
+ "ID": "100k8",
+ "Name": "Elena",
+ "Surname": "Glazov",
+ "Mail": "Elena@mail.ru",
+ "Date of registration": "24,04,2014",
+ "Phone": "375 30 2561421"
+} 
+ID: ,Length: 5, max length: 4, mix length: 1;,
+ID: ,Invalid data type;,
+Phone: ,Invalid data type;
+
+{
+ "ID": "1008",
+ "Name": "Igor",
+ "Surname": "Igorov",
+ "Mail": "Igor@mail.ru",
+ "Date of registration": "25,00,2018",
+ "Phone": "375 29 34k157"
+} 
+Date of registration: ,Invalid date;,
+Phone: ,Length: 13, max length: 16, mix length: 14;,
+Phone: ,Invalid data type;
