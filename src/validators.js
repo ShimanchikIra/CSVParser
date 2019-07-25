@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var fs = require("fs");
 function checkLength(min, max) {
     return {
         validate: function (value) {
@@ -56,3 +57,30 @@ function isInteger(num) {
     return (num ^ 0) === num;
 }
 exports.isInteger = isInteger;
+function isValidObj(value, csv) {
+    var isValid = true;
+    var errorsObj = [];
+    for (var key in value) {
+        errorsObj.push.apply(errorsObj, validation(key, value[key], csv));
+    }
+    if (errorsObj.length) {
+        isValid = false;
+        console.log.apply(console, ["\nInvalid data: \n" + JSON.stringify(value, null, 1)].concat(errorsObj));
+        fs.appendFileSync("src/InvalidData", "\n" + JSON.stringify(value, null, 1) + " " + errorsObj + "\n");
+    }
+    return isValid;
+}
+exports.isValidObj = isValidObj;
+function validation(key, value, csv) {
+    var errors = [];
+    csv.forEach(function (columnDescriptor) {
+        if (key === columnDescriptor.name) {
+            columnDescriptor.validators.forEach(function (validator) {
+                if (validator.validate(value).length)
+                    errors.push.apply(errors, ["\n" + key + ": "].concat(validator.validate(value)));
+            });
+        }
+    });
+    return errors;
+}
+exports.validation = validation;

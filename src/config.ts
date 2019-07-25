@@ -59,4 +59,12 @@ export interface CsvType {
 export interface Validators<T> {
     validate(value: T) : string[];
 }
+export interface User {
+    ID: string,
+    Name: string,
+    Surname: string,
+    Mail: string,
+    'Date of registration': string,
+    Phone: string;
+}
 

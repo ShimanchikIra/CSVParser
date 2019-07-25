@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "dependencies": {
     "@types/node": "^12.0.12",
-    "csv-parser": "^2.3.0"
+    "csv-parser": "^2.3.0",
+    "mongodb": "^3.3.0-beta2"
   },
   "scripts": {
     "test": "jasmine-ts --config=jasmine.json",

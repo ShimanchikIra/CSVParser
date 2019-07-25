@@ -1,4 +1,5 @@
-import {CsvType, Validators} from "./config";
+import {ColumnDescriptor, CsvType, User, Validators} from "./config";
+import fs = require("fs");
 
 export function checkLength (min: number, max: number):Validators<string> {
     return  {
@@ -51,4 +52,30 @@ export let Mail:CsvType={
 };
 export function isInteger(num:number):boolean {
     return (num ^ 0) === num;
+}
+export function isValidObj(value: User | Object, csv:ColumnDescriptor[]): boolean{
+    let isValid:boolean=true;
+    let errorsObj: string[] = [];
+    for (let key in value) {
+        errorsObj.push(...validation(key, value[key], csv));
+    }
+    if (errorsObj.length){
+        isValid=false;
+        console.log(`\nInvalid data: \n${JSON.stringify(value, null, 1)}`, ...errorsObj);
+        fs.appendFileSync("src/InvalidData", `\n${JSON.stringify(value, null, 1)} ${errorsObj}\n`);
+    }
+    return isValid;
+}
+export function validation(key: string, value: string, csv:ColumnDescriptor[]): string[]{
+    let errors: string[] = [];
+    csv.forEach((columnDescriptor) => {
+        if (key === columnDescriptor.name) {
+            columnDescriptor.validators.forEach((validator) =>
+            {
+                if (validator.validate(value).length)
+                    errors.push(`\n${key}: `,...validator.validate(value));
+            })
+        }
+    });
+    return errors;
 }
